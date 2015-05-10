@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class ImageAdapter extends BaseAdapter {
     private static final int PADDING = 4;
-    private static final int WIDTH = 600;
     private static final int HEIGHT = 600;
 
     private List<Integer> imageIds;

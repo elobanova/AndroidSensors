@@ -1,12 +1,20 @@
 package rwth.lab.android.androidsensors;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import rwth.lab.android.androidsensors.accelerometer.AccelerometerActivity;
+import rwth.lab.android.androidsensors.barometer.BarometerActivity;
+import rwth.lab.android.androidsensors.gyroscope.GyroscopeActivity;
+import rwth.lab.android.androidsensors.magnetometer.MagnetometerActivity;
 
 /**
  * Created by ekaterina on 09.05.2015.
@@ -23,5 +31,29 @@ public class ListingSensorsActivity extends Activity {
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this, imageIds));
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Class sensorActivity = null;
+                switch (position) {
+                    case 0:
+                        sensorActivity = AccelerometerActivity.class;
+                        break;
+                    case 1:
+                        sensorActivity = BarometerActivity.class;
+                        break;
+                    case 2:
+                        sensorActivity = GyroscopeActivity.class;
+                        break;
+                    case 3:
+                        sensorActivity = MagnetometerActivity.class;
+                        break;
+                }
+
+                Intent intent = new Intent(ListingSensorsActivity.this,
+                        sensorActivity);
+                startActivity(intent);
+            }
+        });
     }
 }

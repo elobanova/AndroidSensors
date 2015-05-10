@@ -15,8 +15,8 @@ public class BarometerActivity extends FragmentActivity {
     private BarometerFragment fragment;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.barometer_activity);
 
         FragmentManager fragmentManager = getFragmentManager();

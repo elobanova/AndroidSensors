@@ -6,27 +6,27 @@ import android.opengl.GLU;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import rwth.lab.android.androidsensors.sensor.IFigure;
 import rwth.lab.android.androidsensors.sensor.IFigureOpenGLRenderer;
 
 /**
  * Created by ekaterina on 10.05.2015.
  */
 public class OpenGLTriangleRenderer implements IFigureOpenGLRenderer {
-    private Triangle triangle;
+    private IFigure figure;
 
-    // Constructor
-    public OpenGLTriangleRenderer(Context context) {
-        triangle = new Triangle();
+    public OpenGLTriangleRenderer(Context context, IFigure figure) {
+        this.figure = figure;
     }
 
     @Override
     public void setValues(float[] values) {
-        this.triangle.setValues(values);
+        this.figure.setValues(values);
     }
 
     @Override
     public void setMax(float max) {
-        this.triangle.setMax(max);
+        this.figure.setMax(max);
     }
 
     @Override
@@ -65,7 +65,8 @@ public class OpenGLTriangleRenderer implements IFigureOpenGLRenderer {
 
         gl.glLoadIdentity();                 // Reset model-view matrix
         gl.glTranslatef(0.0f, 0.0f, -6.0f); // Translate left and into the screen
-        triangle.draw(gl);
+
+        figure.draw(gl);
     }
 
 }

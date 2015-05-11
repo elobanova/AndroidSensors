@@ -6,10 +6,12 @@ import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import rwth.lab.android.androidsensors.sensor.IFigure;
+
 /**
  * Created by ekaterina on 10.05.2015.
  */
-public class Triangle {
+public class Triangle implements IFigure {
     private FloatBuffer vertexBuffer;  // Buffer for vertex-array
     private FloatBuffer colorBuffer;   // Buffer for color-array
     private ByteBuffer indexBuffer;    // Buffer for index-array

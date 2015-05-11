@@ -16,7 +16,7 @@ public class AccelerometerFragment extends AbstractSensorWithOpenGLViewFragment 
         super.onCreate(savedInstanceState);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        renderer = new OpenGLTriangleRenderer(getActivity());
+        renderer = new OpenGLTriangleRenderer(getActivity(), new Triangle());
         drawableView.setRenderer(renderer);
     }
 

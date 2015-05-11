@@ -39,6 +39,7 @@ public class AnySingleValueMeterDrawableView extends View {
         }
     }
 
+    @Override
     protected void onDraw(Canvas canvas) {
         int width = getWidth();
         int left = (width - RECTANGLE_WIDTH) / 2;

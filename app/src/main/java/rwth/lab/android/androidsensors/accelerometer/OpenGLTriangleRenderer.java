@@ -1,16 +1,17 @@
 package rwth.lab.android.androidsensors.accelerometer;
 
 import android.content.Context;
-import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import rwth.lab.android.androidsensors.sensor.IFigureOpenGLRenderer;
+
 /**
  * Created by ekaterina on 10.05.2015.
  */
-public class OpenGLTriangleRenderer implements GLSurfaceView.Renderer {
+public class OpenGLTriangleRenderer implements IFigureOpenGLRenderer {
     private Triangle triangle;
 
     // Constructor
@@ -18,10 +19,12 @@ public class OpenGLTriangleRenderer implements GLSurfaceView.Renderer {
         triangle = new Triangle();
     }
 
+    @Override
     public void setValues(float[] values) {
         this.triangle.setValues(values);
     }
 
+    @Override
     public void setMax(float max) {
         this.triangle.setMax(max);
     }

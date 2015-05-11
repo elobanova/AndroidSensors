@@ -5,19 +5,19 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.os.Bundle;
 
-import rwth.lab.android.androidsensors.AnyMeterDrawableView;
-import rwth.lab.android.androidsensors.sensor.AbstractSensorFragment;
+import rwth.lab.android.androidsensors.AnySingleValueMeterDrawableView;
+import rwth.lab.android.androidsensors.sensor.AbstractSensorWith2DViewFragment;
 
 /**
  * Created by ekaterina on 09.05.2015.
  */
-public class BarometerFragment extends AbstractSensorFragment {
+public class BarometerFragment extends AbstractSensorWith2DViewFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
-        drawableView = new AnyMeterDrawableView(getActivity(), Color.YELLOW, Color.CYAN);
+        drawableView = new AnySingleValueMeterDrawableView(getActivity(), Color.YELLOW, Color.CYAN);
     }
 
     @Override

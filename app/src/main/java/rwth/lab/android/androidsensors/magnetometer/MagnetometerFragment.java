@@ -5,19 +5,19 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.os.Bundle;
 
-import rwth.lab.android.androidsensors.AnyMeterDrawableView;
-import rwth.lab.android.androidsensors.sensor.AbstractSensorFragment;
+import rwth.lab.android.androidsensors.AnySingleValueMeterDrawableView;
+import rwth.lab.android.androidsensors.sensor.AbstractSensorWith2DViewFragment;
 
 /**
  * Created by ekaterina on 10.05.2015.
  */
-public class MagnetometerFragment extends AbstractSensorFragment {
+public class MagnetometerFragment extends AbstractSensorWith2DViewFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        drawableView = new AnyMeterDrawableView(getActivity(), Color.RED, Color.BLUE);
+        drawableView = new AnySingleValueMeterDrawableView(getActivity(), Color.RED, Color.BLUE);
     }
 
     @Override

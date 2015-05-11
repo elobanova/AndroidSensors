@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import rwth.lab.android.androidsensors.AnyMeterDrawableView;
 import rwth.lab.android.androidsensors.R;
 
 /**
@@ -22,7 +21,6 @@ public abstract class AbstractSensorFragment extends Fragment implements SensorE
     protected SensorManager sensorManager;
     protected Sensor sensor;
 
-    protected AnyMeterDrawableView drawableView;
     private TextView sensorNotSupportedText;
     protected TextView sensorValue;
 
@@ -53,10 +51,12 @@ public abstract class AbstractSensorFragment extends Fragment implements SensorE
         if (sensor == null) {
             sensorNotSupportedText.setText(R.string.not_supported_message);
         } else {
-            container.addView(this.drawableView);
+            addViewForSensorData(container);
         }
         return view;
     }
+
+    protected abstract void addViewForSensorData(ViewGroup container);
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {

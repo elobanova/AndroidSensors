@@ -3,7 +3,6 @@ package rwth.lab.android.androidsensors;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorMatrix;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
@@ -12,7 +11,7 @@ import android.view.View;
 /**
  * Created by ekaterina on 10.05.2015.
  */
-public class AnyMeterDrawableView extends View {
+public class AnySingleValueMeterDrawableView extends View {
     public static final int RECTANGLE_WIDTH = 400;
     public static final int RECTANGLE_HEIGHT = 800;
     public static final int STROKE_WIDTH = 10;
@@ -24,7 +23,7 @@ public class AnyMeterDrawableView extends View {
     private int gradientEndColor;
     private Paint paint = new Paint();
 
-    public AnyMeterDrawableView(Context context, int gradientStartColor, int gradientEndColor) {
+    public AnySingleValueMeterDrawableView(Context context, int gradientStartColor, int gradientEndColor) {
         super(context);
         this.gradientStartColor = gradientStartColor;
         this.gradientEndColor = gradientEndColor;

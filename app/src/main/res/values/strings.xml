@@ -7,4 +7,5 @@
     <string name="gyroscope_title">Gyroscope Sensor</string>
     <string name="magnetometer_title">Magnetometer Sensor</string>
     <string name="not_supported_message">Sorry, this sensor is not supported by your device</string>
+    <string name="shaker_title">Shake it off</string>
 </resources>

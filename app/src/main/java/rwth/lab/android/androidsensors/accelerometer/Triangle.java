@@ -32,18 +32,21 @@ public class Triangle implements IFigure {
 
     public Triangle() {
         setupVertexArrayBuffer(this.vertices);
+        setupColorArrayBuffer(this.colors);
 
+        // Setup index-array buffer. Indices in byte.
+        indexBuffer = ByteBuffer.allocateDirect(indices.length);
+        indexBuffer.put(indices);
+        indexBuffer.position(0);
+    }
+
+    private void setupColorArrayBuffer(float[] colors) {
         // Setup color-array buffer. Colors in float. A float has 4 bytes
         ByteBuffer cbb = ByteBuffer.allocateDirect(colors.length * 4);
         cbb.order(ByteOrder.nativeOrder()); // Use native byte order
         colorBuffer = cbb.asFloatBuffer();  // Convert byte buffer to float
         colorBuffer.put(colors);            // Copy data into buffer
         colorBuffer.position(0);            // Rewind
-
-        // Setup index-array buffer. Indices in byte.
-        indexBuffer = ByteBuffer.allocateDirect(indices.length);
-        indexBuffer.put(indices);
-        indexBuffer.position(0);
     }
 
     private void setupVertexArrayBuffer(float[] vertices) {
@@ -77,6 +80,13 @@ public class Triangle implements IFigure {
                     1.0f, -1.0f, 0.0f  // 2. right-bottom
             };
             setupVertexArrayBuffer(vertices);
+        }
+    }
+
+    @Override
+    public void setColor(float[] colors) {
+        if (colors != null) {
+            setupColorArrayBuffer(colors);
         }
     }
 

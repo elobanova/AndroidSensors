@@ -5,6 +5,7 @@ import android.hardware.SensorEvent;
 import android.os.Bundle;
 
 import rwth.lab.android.androidsensors.sensor.AbstractSensorWithOpenGLViewFragment;
+import rwth.lab.android.androidsensors.sensor.OpenGLRenderer;
 
 /**
  * Created by ekaterina on 10.05.2015.
@@ -16,7 +17,7 @@ public class AccelerometerFragment extends AbstractSensorWithOpenGLViewFragment 
         super.onCreate(savedInstanceState);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        renderer = new OpenGLTriangleRenderer(getActivity(), new Triangle());
+        renderer = new OpenGLRenderer(getActivity(), new Triangle());
         drawableView.setRenderer(renderer);
     }
 

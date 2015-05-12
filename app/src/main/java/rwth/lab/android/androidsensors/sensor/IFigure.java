@@ -11,4 +11,6 @@ public interface IFigure {
     void setMax(float max);
 
     void setValues(float[] values);
+
+    void setColor(float[] colors);
 }

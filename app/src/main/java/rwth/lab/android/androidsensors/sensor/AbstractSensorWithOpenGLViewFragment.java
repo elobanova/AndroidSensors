@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 public abstract class AbstractSensorWithOpenGLViewFragment extends AbstractSensorFragment {
 
     protected GLSurfaceView drawableView;
-    protected IFigureOpenGLRenderer renderer;
+    protected OpenGLRenderer renderer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

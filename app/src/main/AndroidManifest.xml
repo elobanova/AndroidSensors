@@ -28,6 +28,9 @@
         <activity
             android:name=".magnetometer.MagnetometerActivity"
             android:label="@string/magnetometer_title"></activity>
+        <activity
+            android:name=".shake.ShakeActivity"
+            android:label="@string/shaker_title"></activity>
     </application>
 
 </manifest>

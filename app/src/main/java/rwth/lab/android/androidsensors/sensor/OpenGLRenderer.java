@@ -11,7 +11,8 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by ekaterina on 12.05.2015.
  */
 public class OpenGLRenderer implements GLSurfaceView.Renderer {
-    private IFigure figure;
+    protected IFigure figure;
+    protected int textureId = -1;
 
     public OpenGLRenderer(Context context, IFigure figure) {
         this.figure = figure;
@@ -23,10 +24,6 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
 
     public void setMax(float max) {
         this.figure.setMax(max);
-    }
-
-    public void setColor(float[] colors) {
-        figure.setColor(colors);
     }
 
     @Override
@@ -67,5 +64,9 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         gl.glTranslatef(0.0f, 0.0f, -6.0f); // Translate left and into the screen
 
         figure.draw(gl);
+    }
+
+    public void setTexture(int id) {
+        this.textureId = id;
     }
 }

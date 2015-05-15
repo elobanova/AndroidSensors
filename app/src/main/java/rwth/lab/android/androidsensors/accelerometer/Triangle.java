@@ -1,5 +1,7 @@
 package rwth.lab.android.androidsensors.accelerometer;
 
+import android.content.Context;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -84,10 +86,8 @@ public class Triangle implements IFigure {
     }
 
     @Override
-    public void setColor(float[] colors) {
-        if (colors != null) {
-            setupColorArrayBuffer(colors);
-        }
+    public void loadGLTexture(GL10 gl, Context context, int id) {
+
     }
 
     public void setMax(float max) {

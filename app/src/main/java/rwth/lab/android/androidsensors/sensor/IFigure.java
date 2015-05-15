@@ -1,5 +1,7 @@
 package rwth.lab.android.androidsensors.sensor;
 
+import android.content.Context;
+
 import javax.microedition.khronos.opengles.GL10;
 
 /**
@@ -12,5 +14,5 @@ public interface IFigure {
 
     void setValues(float[] values);
 
-    void setColor(float[] colors);
+    void loadGLTexture(GL10 gl, Context context, int id);
 }

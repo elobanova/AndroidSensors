@@ -23,10 +23,12 @@ public abstract class AbstractSensorFragment extends Fragment implements SensorE
 
     private TextView sensorNotSupportedText;
     protected TextView sensorValue;
+    private ViewGroup container;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
     }
 
@@ -51,9 +53,18 @@ public abstract class AbstractSensorFragment extends Fragment implements SensorE
         if (sensor == null) {
             sensorNotSupportedText.setText(R.string.not_supported_message);
         } else {
+            this.container = container;
             addViewForSensorData(container);
         }
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (this.container != null) {
+            container.removeAllViews();
+        }
     }
 
     protected abstract void addViewForSensorData(ViewGroup container);

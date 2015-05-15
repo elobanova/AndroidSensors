@@ -3,7 +3,9 @@ package rwth.lab.android.androidsensors.shake;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.os.Bundle;
+import android.view.View;
 
+import rwth.lab.android.androidsensors.R;
 import rwth.lab.android.androidsensors.sensor.AbstractSensorWithOpenGLViewFragment;
 import rwth.lab.android.androidsensors.sensor.OpenGLRenderer;
 
@@ -13,7 +15,7 @@ import rwth.lab.android.androidsensors.sensor.OpenGLRenderer;
 public class ShakeFragment extends AbstractSensorWithOpenGLViewFragment {
     private long timeOfLastUpdate = 0;
     private float lastX, lastY, lastZ;
-    private static final int SHAKE_THRESHOLD = 600;
+    private static final int SHAKE_THRESHOLD = 900;
     private static final int DELAY_THRESHOLD = 100;
 
     @Override
@@ -21,7 +23,7 @@ public class ShakeFragment extends AbstractSensorWithOpenGLViewFragment {
         super.onCreate(savedInstanceState);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        renderer = new OpenGLRenderer(getActivity(), new Circle());
+        renderer = new ShakeImageOpenGLRenderer(getActivity(), new Cube());
         drawableView.setRenderer(renderer);
     }
 
@@ -40,11 +42,12 @@ public class ShakeFragment extends AbstractSensorWithOpenGLViewFragment {
                 float speed = Math.abs(x + y + z - lastX - lastY - lastZ) / timeSlot * 10000;
 
                 if (speed > SHAKE_THRESHOLD) {
-                    float[] colors = generateRandomColors();
-                    renderer.setColor(colors);
-
-                    //update label
-                    sensorValue.setText("Shaking it off!");
+                    /*
+                    Please, notice that we decided to change the image only once
+                    due to the low performance of openGL. In order to see the shake again,
+                    a user will need to come back to this activity once again.
+                     */
+                    renderer.setTexture(R.drawable.android_female);
                 }
 
                 lastX = x;
@@ -55,7 +58,9 @@ public class ShakeFragment extends AbstractSensorWithOpenGLViewFragment {
         }
     }
 
-    private float[] generateRandomColors() {
-        return null;
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        sensorValue.setText("Shake it off to see the girl.");
     }
 }

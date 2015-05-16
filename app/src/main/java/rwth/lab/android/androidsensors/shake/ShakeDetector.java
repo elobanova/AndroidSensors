@@ -19,13 +19,12 @@ public class ShakeDetector {
             float z = values[2];
             float speed = Math.abs(x + y + z - lastX - lastY - lastZ) / timeSlot * 10000;
 
-            if (speed > SHAKE_THRESHOLD) {
-                return true;
-            }
-
             lastX = x;
             lastY = y;
             lastZ = z;
+            if (speed > SHAKE_THRESHOLD) {
+                return true;
+            }
         }
         return false;
     }

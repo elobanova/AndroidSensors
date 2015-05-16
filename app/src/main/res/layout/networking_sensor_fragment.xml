@@ -46,11 +46,19 @@
         android:layout_toRightOf="@+id/registerButton"
         android:layout_alignBottom="@id/registerButton" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/registerButton"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/hungry" />
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/shakeEventList"
-        android:layout_below="@+id/registerButton"
+        android:layout_below="@+id/imageView"
         android:layout_gravity="center" />
 
     <TextView

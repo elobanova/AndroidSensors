@@ -7,7 +7,7 @@ public class ShakeDetector {
     private long timeOfLastUpdate = 0;
     private float lastX, lastY, lastZ;
     private static final int SHAKE_THRESHOLD = 900;
-    private static final int DELAY_THRESHOLD = 100;
+    private static final int DELAY_THRESHOLD = 200;
 
     public boolean isShakeDetected(float[] values) {
         long currentTime = System.currentTimeMillis();

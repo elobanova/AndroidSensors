@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,9 @@ public class ShakeNetworkFragment extends AbstractSensorFragment {
     private EditText ipAdressField;
     private EditText portEditText;
     private EditText nameEditText;
-    private List<Shake> shakeEventList = new ArrayList<Shake>();
+    private ImageView imageView;
+    private List<Shake> shakeEventList = new ArrayList<>();
+    boolean isImageShaked = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,15 @@ public class ShakeNetworkFragment extends AbstractSensorFragment {
             if (shakeDetector.isShakeDetected(values)) {
                 //send event
                 sensorClient.sendEvent();
+                if (imageView != null) {
+                    if (isImageShaked) {
+                        imageView.setImageResource(R.drawable.eating);
+                        isImageShaked = false;
+                    } else {
+                        imageView.setImageResource(R.drawable.hungry);
+                        isImageShaked = true;
+                    }
+                }
             }
         }
     }
@@ -73,6 +85,7 @@ public class ShakeNetworkFragment extends AbstractSensorFragment {
             registerButton = (Button) view.findViewById(R.id.registerButton);
             unregisterButtton = (Button) view.findViewById(R.id.unregisterButton);
             shakeEventListView = (ListView) view.findViewById(R.id.shakeEventList);
+            imageView = (ImageView) view.findViewById(R.id.imageView);
 
             final BaseAdapter adapter = new BaseAdapter() {
                 @Override

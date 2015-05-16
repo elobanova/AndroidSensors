@@ -16,6 +16,7 @@ import rwth.lab.android.androidsensors.barometer.BarometerActivity;
 import rwth.lab.android.androidsensors.gyroscope.GyroscopeActivity;
 import rwth.lab.android.androidsensors.magnetometer.MagnetometerActivity;
 import rwth.lab.android.androidsensors.shake.ShakeActivity;
+import rwth.lab.android.androidsensors.shakenetwork.ShakeNetworkActivity;
 
 /**
  * Created by ekaterina on 09.05.2015.
@@ -23,7 +24,7 @@ import rwth.lab.android.androidsensors.shake.ShakeActivity;
 public class ListingSensorsActivity extends Activity {
     private List<Integer> imageIds = new ArrayList<Integer>(
             Arrays.asList(R.drawable.accelerometer, R.drawable.barometer,
-                    R.drawable.gyroscope, R.drawable.magnetometer, R.drawable.shaker));
+                    R.drawable.gyroscope, R.drawable.magnetometer, R.drawable.shaker, R.drawable.network_shake));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,9 @@ public class ListingSensorsActivity extends Activity {
                         break;
                     case 4:
                         sensorActivity = ShakeActivity.class;
+                        break;
+                    case 5:
+                        sensorActivity= ShakeNetworkActivity.class;
                         break;
                 }
 

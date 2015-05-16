@@ -1,13 +1,11 @@
 package rwth.lab.android.androidsensors.shakenetwork;
 
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,6 +20,8 @@ import rwth.lab.android.androidsensors.R;
 import rwth.lab.android.androidsensors.sensor.AbstractSensorFragment;
 import rwth.lab.android.androidsensors.shake.ShakeDetector;
 import rwth.lab.android.androidsensors.shakenetwork.packet.Shake;
+import rwth.lab.android.androidsensors.shakenetwork.helper.Validator;
+
 
 /**
  * Created by ekaterina on 16.05.2015.
@@ -55,7 +55,7 @@ public class ShakeNetworkFragment extends AbstractSensorFragment {
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float[] values = event.values;
-            if (shakeDetector.isShakeDetected(values)) {
+            if (shakeDetector.isShakeDetected(values) && sensorClient.isRegistered()) {
                 //send event
                 sensorClient.sendEvent();
                 if (imageView != null) {
@@ -86,33 +86,12 @@ public class ShakeNetworkFragment extends AbstractSensorFragment {
             unregisterButtton = (Button) view.findViewById(R.id.unregisterButton);
             shakeEventListView = (ListView) view.findViewById(R.id.shakeEventList);
             imageView = (ImageView) view.findViewById(R.id.imageView);
+            ipAdressField.setText("87.106.23.235");
+            portEditText.setText("3000");
+            ipAdressField.addTextChangedListener(new Validator(ipAdressField,portEditText,registerButton));
 
-            final BaseAdapter adapter = new BaseAdapter() {
-                @Override
-                public int getCount() {
-                    return shakeEventList.size();
-                }
-
-                @Override
-                public Object getItem(int position) {
-                    return shakeEventList.get(position);
-                }
-
-                @Override
-                public long getItemId(int position) {
-                    return position;
-                }
-
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    TextView textView = new TextView(getActivity());
-                    textView.setText(shakeEventList.get(position).getName() + " : " +
-                            shakeEventList.get(position).getHumanTimeShaken());
-                    textView.setTextColor(Color.WHITE);
-                    return textView;
-
-                }
-            };
+            portEditText.addTextChangedListener(new Validator(ipAdressField,portEditText, registerButton));
+            final ShakeListviewAdapter adapter = new ShakeListviewAdapter(shakeEventList, this.getActivity());
             shakeEventListView.setAdapter(adapter);
             sensorClient.setOnShakeListener(new SensorClient.OnShakeFromNetworkListener() {
                 @Override
@@ -148,4 +127,6 @@ public class ShakeNetworkFragment extends AbstractSensorFragment {
         }
         return view;
     }
+
+
 }

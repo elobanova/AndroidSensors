@@ -6,6 +6,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:theme="@style/AppTheme"
         android:label="@string/app_name">
         <activity
             android:name=".ListingSensorsActivity"
@@ -34,7 +35,7 @@
 
         <activity
             android:name=".shakenetwork.ShakeNetworkActivity"
-            android:label="@string/shaker_title"></activity>
+            android:label="@string/shaker_with_others"></activity>
 
     </application>
 

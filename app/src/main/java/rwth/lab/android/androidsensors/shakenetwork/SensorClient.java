@@ -43,6 +43,8 @@ public class SensorClient {
     public static final byte TYPE_SHAKE = 5;
     public static final int RECEIVE_BUFFER_MAX = 256;
 
+
+    private boolean isRegistered=false;
     private OnShakeFromNetworkListener onShakeListener;
     private String sensorServerIp;
     private int sensorServerPort;
@@ -105,6 +107,8 @@ public class SensorClient {
 
     }
 
+
+
     public void unregister() {
         uiCallback.removeCallbacksAndMessages(null);
         receiverWorker.terminate();
@@ -113,7 +117,9 @@ public class SensorClient {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         //send unregister header
+        isRegistered=false;
         new UDPSendTask(TYPE_UNREGISTER).execute(new Unregister());
     }
 
@@ -129,7 +135,9 @@ public class SensorClient {
     public void setSensorServerPort(int sensorServerPort) {
         this.sensorServerPort = sensorServerPort;
     }
-
+    public boolean isRegistered() {
+        return isRegistered;
+    }
 
     private void sendAsDatagram(Packet packet1) throws IOException {
         InetAddress address;
@@ -232,8 +240,10 @@ public class SensorClient {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (type == TYPE_REGISTER)
+            if (type == TYPE_REGISTER) {
+                isRegistered=true;
                 sendKeepAlivePeriodically();
+            }
         }
     }
 

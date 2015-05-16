@@ -3,17 +3,19 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Hello, please register for events..."
+        android:text="@string/shakit_with_others_intro"
         android:id="@+id/displayEventView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/shake_network_general_margin" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ipAdressField"
         android:layout_below="@+id/displayEventView"
-        android:hint="IP xxx.xxx.xxx.xxx" />
+        android:hint="IP xxx.xxx.xxx.xxx"
+        android:layout_marginLeft="@dimen/shake_network_general_margin" />
 
     <EditText
         android:id="@+id/portField"
@@ -21,7 +23,8 @@
         android:layout_height="wrap_content"
         android:hint="Port xxxx"
         android:layout_toRightOf="@id/ipAdressField"
-        android:layout_alignBottom="@+id/ipAdressField" />
+        android:layout_alignBottom="@+id/ipAdressField"
+        android:layout_marginLeft="@dimen/shake_network_general_margin" />
 
     <EditText
         android:id="@+id/nameField"
@@ -29,22 +32,25 @@
         android:layout_height="wrap_content"
         android:hint="Name"
         android:layout_toRightOf="@id/portField"
-        android:layout_alignBottom="@id/portField" />
+        android:layout_alignBottom="@id/portField"
+        android:layout_marginLeft="@dimen/shake_network_general_margin" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/registerButton"
         android:layout_below="@id/ipAdressField"
-        android:text="Register" />
+        android:text="@string/subscribe"
+        android:layout_marginLeft="@dimen/shake_network_general_margin" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/unregisterButton"
-        android:text="Unregister"
+        android:text="@string/unregister"
         android:layout_toRightOf="@+id/registerButton"
-        android:layout_alignBottom="@id/registerButton" />
+        android:layout_alignBottom="@id/registerButton"
+        android:layout_marginLeft="@dimen/shake_network_general_margin" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -52,14 +58,16 @@
         android:id="@+id/imageView"
         android:layout_below="@+id/registerButton"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/hungry" />
+        android:src="@drawable/hungry"
+        android:layout_margin="@dimen/shake_network_general_margin" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/shakeEventList"
         android:layout_below="@+id/imageView"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/shake_network_general_margin" />
 
     <TextView
         android:layout_width="wrap_content"

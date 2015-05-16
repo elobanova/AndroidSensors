@@ -35,7 +35,9 @@
 
         <activity
             android:name=".shakenetwork.ShakeNetworkActivity"
-            android:label="@string/shaker_with_others"></activity>
+            android:label="@string/shaker_with_others"
+            android:screenOrientation="portrait"
+            ></activity>
 
     </application>
 

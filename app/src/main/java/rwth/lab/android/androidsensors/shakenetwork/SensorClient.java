@@ -112,12 +112,13 @@ public class SensorClient {
     public void unregister() {
         uiCallback.removeCallbacksAndMessages(null);
         receiverWorker.terminate();
-        try {
+       /* try {
             periodic.join();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        */
         //send unregister header
         isRegistered=false;
         new UDPSendTask(TYPE_UNREGISTER).execute(new Unregister());

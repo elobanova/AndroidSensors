@@ -13,10 +13,7 @@ import rwth.lab.android.androidsensors.sensor.OpenGLRenderer;
  * Created by ekaterina on 12.05.2015.
  */
 public class ShakeFragment extends AbstractSensorWithOpenGLViewFragment {
-    private long timeOfLastUpdate = 0;
-    private float lastX, lastY, lastZ;
-    private static final int SHAKE_THRESHOLD = 900;
-    private static final int DELAY_THRESHOLD = 100;
+    private ShakeDetector shakeDetector = new ShakeDetector();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,28 +28,13 @@ public class ShakeFragment extends AbstractSensorWithOpenGLViewFragment {
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float[] values = event.values;
-
-            long currentTime = System.currentTimeMillis();
-            long timeSlot = (currentTime - timeOfLastUpdate);
-            if (timeSlot > DELAY_THRESHOLD) {
-                timeOfLastUpdate = currentTime;
-                float x = values[0];
-                float y = values[1];
-                float z = values[2];
-                float speed = Math.abs(x + y + z - lastX - lastY - lastZ) / timeSlot * 10000;
-
-                if (speed > SHAKE_THRESHOLD) {
-                    /*
+            if (shakeDetector.isShakeDetected(values)) {
+                /*
                     Please, notice that we decided to change the image only once
                     due to the low performance of openGL. In order to see the shake again,
                     a user will need to come back to this activity once again.
-                     */
-                    renderer.setTexture(R.drawable.android_female);
-                }
-
-                lastX = x;
-                lastY = y;
-                lastZ = z;
+                */
+                renderer.setTexture(R.drawable.android_female);
             }
             updateRenderer(values);
         }

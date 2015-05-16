@@ -21,9 +21,9 @@ public abstract class AbstractSensorFragment extends Fragment implements SensorE
     protected SensorManager sensorManager;
     protected Sensor sensor;
 
-    private TextView sensorNotSupportedText;
+    protected TextView sensorNotSupportedText;
     protected TextView sensorValue;
-    private ViewGroup container;
+    protected ViewGroup container;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

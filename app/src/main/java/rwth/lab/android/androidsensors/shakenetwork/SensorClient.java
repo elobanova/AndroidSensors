@@ -11,6 +11,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+
 import rwth.lab.android.androidsensors.shakenetwork.packet.*;
 
 
@@ -27,35 +28,33 @@ public class SensorClient {
         void onError(String message);
 
     }
-
-    public static final int SO_TIMEOUT = 15000;//keep alive is sent every time this timeout occurs
-
-
-
-    private static final String SHAKE_DATA = "shake";
-    private static final String ERROR_DATA = "error";
-    private static final int SUCESS_SHAKE_RECV = 100;
-    private static final int ERROR_SHAKE_RECV = 100;
     public static final byte TYPE_REGISTER = 1;
     public static final byte TYPE_UNREGISTER = 2;
     public static final byte TYPE_KEEPALIVE = 3;
     public static final byte TYPE_EVENT = 4;
     public static final byte TYPE_SHAKE = 5;
     public static final int RECEIVE_BUFFER_MAX = 256;
+    public static final int SO_TIMEOUT = 15000;//keep alive is sent every time this timeout occurs
 
-
-    private boolean isRegistered=false;
+    private static final String SHAKE_DATA = "shake";
+    private static final String ERROR_DATA = "error";
+    private static final int SUCESS_SHAKE_RECV = 100;
+    private static final int ERROR_SHAKE_RECV = 100;
+    private boolean isRegistered = false;
     private OnShakeFromNetworkListener onShakeListener;
     private String sensorServerIp;
     private int sensorServerPort;
-
     private Thread periodic;
     private Handler uiCallback;
-    ReceiverWorker receiverWorker;
-
+    private ReceiverWorker receiverWorker;
     private DatagramSocket udpSocket = null;
 
-
+    /**
+     * Creates a new SensorClient instance working on a UDP socket.
+     * Provide ip and port next using the corresponding methods.
+     *
+     * @return
+     */
     public static SensorClient newInstance() {
         SensorClient sensorClient = new SensorClient();
         try {
@@ -66,12 +65,21 @@ public class SensorClient {
         return sensorClient;
     }
 
-
+    /**
+     * only to be called on a registered client, check with SensorClient.isRegistered()
+     */
     public void sendEvent() {
 
         new UDPSendTask(TYPE_EVENT).execute(new MEvent());
     }
 
+    /**
+     * Method sends register packet to sensor server. Off main thread
+     * keep alive header is periodically sent to sensor server for ever if you dont
+     * call unregister(). Make sure to call unregister, when leaving the corresponding activity.
+     *
+     * @param name
+     */
     public void register(String name) {
         if ((periodic != null && !periodic.isAlive()) || (periodic == null))
             new UDPSendTask(TYPE_REGISTER).execute(new Register(name));
@@ -86,7 +94,6 @@ public class SensorClient {
         receiverWorker = new ReceiverWorker();
         periodic = new Thread(receiverWorker);
 
-
         uiCallback = new Handler() {
             public void handleMessage(Message msg) {
                 Shake shake = null;
@@ -99,7 +106,6 @@ public class SensorClient {
                     onShakeListener.onError(e.getMessage());
                 }
 
-
             }
         };
         periodic.start();
@@ -108,11 +114,18 @@ public class SensorClient {
     }
 
 
-
+    /**
+     * Sends unregister header to sensor server. Don't expect any result it is
+     * UDP, if it didn't work out, try again.
+     */
     public void unregister() {
         uiCallback.removeCallbacksAndMessages(null);
         receiverWorker.terminate();
-       /* try {
+       /*
+       we are not running this code, because it blocks the UI
+       and we anyway dont need to wait on thread termination
+
+       try {
             periodic.join();
 
         } catch (InterruptedException e) {
@@ -120,7 +133,7 @@ public class SensorClient {
         }
         */
         //send unregister header
-        isRegistered=false;
+        isRegistered = false;
         new UDPSendTask(TYPE_UNREGISTER).execute(new Unregister());
     }
 
@@ -136,6 +149,7 @@ public class SensorClient {
     public void setSensorServerPort(int sensorServerPort) {
         this.sensorServerPort = sensorServerPort;
     }
+
     public boolean isRegistered() {
         return isRegistered;
     }
@@ -242,7 +256,7 @@ public class SensorClient {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if (type == TYPE_REGISTER) {
-                isRegistered=true;
+                isRegistered = true;
                 sendKeepAlivePeriodically();
             }
         }

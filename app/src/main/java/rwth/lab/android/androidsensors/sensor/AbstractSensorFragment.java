@@ -44,6 +44,15 @@ public abstract class AbstractSensorFragment extends Fragment implements SensorE
         sensorManager.unregisterListener(this);
     }
 
+    /**
+     * If the sensor is not supported by the device, this method will put the corresponding text on the text view.
+     * In another case, a drawable view for displaying the sensor data will be placed into container view
+     *
+     * @param inflater           a layout inflater
+     * @param container          a container for the fragment views
+     * @param savedInstanceState a bundle containing the saved data
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +76,11 @@ public abstract class AbstractSensorFragment extends Fragment implements SensorE
         }
     }
 
+    /**
+     * Places the drawable view for displaying the sensor data to the container
+     *
+     * @param container a container in which the drawable view will be placed
+     */
     protected abstract void addViewForSensorData(ViewGroup container);
 
     @Override

@@ -15,18 +15,14 @@ import java.util.regex.Pattern;
 
 
 public class Validator implements TextWatcher {
-
-
     private View enable;
     private EditText ipField;
     private EditText portField;
 
-    public Validator( EditText ipField, EditText portField,View enable) {
-        this.enable=enable;
+    public Validator(EditText ipField, EditText portField, View enable) {
+        this.enable = enable;
         this.ipField = ipField;
         this.portField = portField;
-
-
     }
 
     @Override
@@ -50,8 +46,5 @@ public class Validator implements TextWatcher {
             enable.setEnabled(true);
         else
             enable.setEnabled(false);
-
-
     }
-
 }

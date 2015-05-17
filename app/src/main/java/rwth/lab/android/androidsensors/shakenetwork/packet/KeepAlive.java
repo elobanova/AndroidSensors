@@ -8,11 +8,10 @@ import rwth.lab.android.androidsensors.shakenetwork.SensorClient;
  */
 public class KeepAlive implements Packet {
 
-
     @Override
     public byte[] getBytes() {
-        byte[] b=new byte[1];
-        b[0]= SensorClient.TYPE_KEEPALIVE;
+        byte[] b = new byte[1];
+        b[0] = SensorClient.TYPE_KEEPALIVE;
         return b;
     }
 }

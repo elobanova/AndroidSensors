@@ -25,8 +25,6 @@ public class Register implements Packet {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public byte[] getBytes() {
@@ -34,14 +32,11 @@ public class Register implements Packet {
         byteBuffer.put(type);
         byteBuffer.put(nameLenght);
 
-
         try {
             byteBuffer.put(name.getBytes("UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
-
         return byteBuffer.array();
     }
 }

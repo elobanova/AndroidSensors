@@ -30,6 +30,12 @@ public abstract class AbstractSensorWithOpenGLViewFragment extends AbstractSenso
         drawableView.onPause();
     }
 
+    /**
+     * Updates the OpenGL renderer with the up-to-date information
+     * about the coordinates changes
+     *
+     * @param values the up-to-date coordinates
+     */
     protected void updateRenderer(float[] values) {
         renderer.setValues(values);
         float maxXY = Math.max(Math.abs(values[0]), Math.abs(values[1]));

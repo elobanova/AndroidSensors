@@ -19,19 +19,19 @@ import java.nio.FloatBuffer;
 public class Cube implements IFigure {
     private FloatBuffer vertexBuffer;
     private float vertices[] = {
-            -1.0f, -1.0f, 0.0f,        // V1 - bottom left
-            -1.0f, 1.0f, 0.0f,        // V2 - top left
-            1.0f, -1.0f, 0.0f,        // V3 - bottom right
-            1.0f, 1.0f, 0.0f            // V4 - top right
+            -1.0f, -1.0f, 0.0f,        // bottom left
+            -1.0f, 1.0f, 0.0f,        // top left
+            1.0f, -1.0f, 0.0f,        // bottom right
+            1.0f, 1.0f, 0.0f            // top right
     };
 
     private FloatBuffer textureBuffer;
     private float texture[] = {
             // Mapping coordinates for the vertices
-            0.0f, 1.0f,        // top left		(V2)
-            0.0f, 0.0f,        // bottom left	(V1)
-            1.0f, 1.0f,        // top right	(V4)
-            1.0f, 0.0f        // bottom right	(V3)
+            0.0f, 1.0f,        // top left
+            0.0f, 0.0f,        // bottom left
+            1.0f, 1.0f,        // top right
+            1.0f, 0.0f        // bottom right
     };
 
     private int[] textures = new int[1];

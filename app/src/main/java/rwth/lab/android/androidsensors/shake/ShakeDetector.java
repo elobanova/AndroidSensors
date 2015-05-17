@@ -9,6 +9,13 @@ public class ShakeDetector {
     private static final int SHAKE_THRESHOLD = 900;
     private static final int DELAY_THRESHOLD = 200;
 
+    /**
+     * Detects if the shake event has been performed on a device based on
+     * the time slot tracked and the updates for the coordinates
+     *
+     * @param values the current coordinates (e.g. taken from accelerometer)
+     * @return true if the shake event occurred
+     */
     public boolean isShakeDetected(float[] values) {
         long currentTime = System.currentTimeMillis();
         long timeSlot = (currentTime - timeOfLastUpdate);

@@ -60,7 +60,7 @@ public class Triangle implements IFigure {
         vertexBuffer.position(0);           // Rewind
     }
 
-    // Render this shape
+    @Override
     public void draw(GL10 gl) {
         // Enable arrays and define the buffers
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
@@ -74,6 +74,7 @@ public class Triangle implements IFigure {
         gl.glDisableClientState(GL10.GL_COLOR_ARRAY);   // Disable color-array
     }
 
+    @Override
     public void setValues(float[] values) {
         if (this.max != -1.0f && this.max != 0.0f) {
             float[] vertices = {  // Vertices of the triangle
@@ -90,6 +91,7 @@ public class Triangle implements IFigure {
 
     }
 
+    @Override
     public void setMax(float max) {
         this.max = max;
     }

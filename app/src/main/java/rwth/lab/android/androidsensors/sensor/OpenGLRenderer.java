@@ -66,6 +66,11 @@ public class OpenGLRenderer implements GLSurfaceView.Renderer {
         figure.draw(gl);
     }
 
+    /**
+     * Sets the id of the drawable specified in its parameter to the texture
+     *
+     * @param id id of the drawable
+     */
     public void setTexture(int id) {
         this.textureId = id;
     }

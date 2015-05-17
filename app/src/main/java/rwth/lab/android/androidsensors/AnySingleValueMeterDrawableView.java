@@ -23,6 +23,14 @@ public class AnySingleValueMeterDrawableView extends View {
     private int gradientEndColor;
     private Paint paint = new Paint();
 
+    /**
+     * Creates an instance of the drawable view with the bar
+     * for the single-valued sensors (like barometer or magnetometer)
+     *
+     * @param context            an activity context
+     * @param gradientStartColor a starting color for the gradient of the bar
+     * @param gradientEndColor   an ending color for the gradient of the bar
+     */
     public AnySingleValueMeterDrawableView(Context context, int gradientStartColor, int gradientEndColor) {
         super(context);
         this.gradientStartColor = gradientStartColor;

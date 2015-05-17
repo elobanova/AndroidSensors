@@ -133,6 +133,4 @@ public class ShakeNetworkFragment extends AbstractSensorFragment {
         super.onDestroy();
         sensorClient.unregister();//maybe to be removed
     }
-
-
 }

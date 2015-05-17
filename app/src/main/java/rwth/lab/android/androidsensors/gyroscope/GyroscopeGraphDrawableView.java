@@ -73,6 +73,13 @@ public class GyroscopeGraphDrawableView extends View {
         }
     }
 
+    /**
+     * Adds the float tracked value to the tail of the list
+     * in order to be displayed on the graph. If there's not enough space in the list,
+     * the head of it will be removed.
+     *
+     * @param s a value to be tracked
+     */
     public void addValueToTrack(float s) {
         trackedValues.add(s);
 

@@ -154,17 +154,7 @@ public class SensorClient {
         return isRegistered;
     }
 
-    private void sendAsDatagram(Packet packet1) throws IOException {
-        InetAddress address;
-        Packet packet = packet1;
-        byte[] buffer = packet.getBytes();
 
-
-        address = InetAddress.getByName(sensorServerIp);//localhost as to be accesssed from emulator
-        DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length,
-                address, sensorServerPort);
-        udpSocket.send(datagramPacket);
-    }
 
 
     /**
@@ -262,4 +252,20 @@ public class SensorClient {
         }
     }
 
+    /**
+     * Method sends udp packet assuming IP and port was provided.
+     * @param packet1
+     * @throws IOException
+     */
+    private void sendAsDatagram(Packet packet1) throws IOException {
+        InetAddress address;
+        Packet packet = packet1;
+        byte[] buffer = packet.getBytes();
+
+
+        address = InetAddress.getByName(sensorServerIp);//localhost as to be accesssed from emulator
+        DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length,
+                address, sensorServerPort);
+        udpSocket.send(datagramPacket);
+    }
 }

@@ -93,10 +93,10 @@ public class SensorClient {
 
         uiCallback = new Handler() {
             public void handleMessage(Message msg) {
-                Shake shake = null;
+
                 // BACK on UI THREAD do STUFF WITH UI
                 if (msg.arg1 == SUCESS_SHAKE_RECV) {
-                    shake = (Shake) msg.getData().getSerializable(SHAKE_DATA);
+                    Shake shake = (Shake) msg.getData().getSerializable(SHAKE_DATA);
                     onShakeListener.onShakeReceived(shake);
                 } else if (msg.arg1 == ERROR_SHAKE_RECV) {
                     IOException e = (IOException) msg.getData().getSerializable(ERROR_DATA);
@@ -115,17 +115,8 @@ public class SensorClient {
     public void unregister() {
         uiCallback.removeCallbacksAndMessages(null);
         receiverWorker.terminate();
-       /*
-       we are not running this code, because it blocks the UI
-       and we anyway dont need to wait on thread termination
-
-       try {
-            periodic.join();
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        */
+        //periodic.join();
+        periodic.interrupt();
         //send unregister header
         isRegistered = false;
         new UDPSendTask(TYPE_UNREGISTER).execute(new Unregister());
@@ -213,7 +204,7 @@ public class SensorClient {
         protected Void doInBackground(Packet... packets) {
             try {
                 sendAsDatagram(packets[0]);
-                return null; //shake;
+
             } catch (UnknownHostException e) {
                 onShakeListener.onError(e.getMessage());
             } catch (SocketException e) {
@@ -250,4 +241,6 @@ public class SensorClient {
                 address, sensorServerPort);
         udpSocket.send(datagramPacket);
     }
+
+
 }

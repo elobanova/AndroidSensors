@@ -21,7 +21,6 @@ import rwth.lab.android.androidsensors.shakenetwork.packet.Shake;
  * Created by evgenijavstein on 16/05/15.
  */
 public class ShakeListviewAdapter extends BaseAdapter {
-
     private List<Shake> shakeEventList;
     private Context context;
     private List<String> senders = new ArrayList<>();
@@ -30,7 +29,6 @@ public class ShakeListviewAdapter extends BaseAdapter {
     public ShakeListviewAdapter(List<Shake> shakeEventList, Context context) {
         this.shakeEventList = shakeEventList;
         this.context = context;
-
     }
 
     @Override
@@ -82,7 +80,6 @@ public class ShakeListviewAdapter extends BaseAdapter {
         viewHolder.circleView.setBackground(dr);
 
         return v;
-
     }
 
     /**
@@ -100,12 +97,9 @@ public class ShakeListviewAdapter extends BaseAdapter {
         }
     }
 
-
     private int randomColor() {
         Random random = new Random();
         String[] colorsArr = context.getResources().getStringArray(R.array.colors);
         return Color.parseColor(colorsArr[random.nextInt(colorsArr.length)]);
     }
-
-
 }

@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.net.DatagramPacket;
@@ -21,13 +22,11 @@ import rwth.lab.android.androidsensors.shakenetwork.packet.*;
 public class SensorClient {
 
     public interface OnShakeFromNetworkListener {
-
-
         void onShakeReceived(Shake shake);
 
         void onError(String message);
-
     }
+
     public static final byte TYPE_REGISTER = 1;
     public static final byte TYPE_UNREGISTER = 2;
     public static final byte TYPE_KEEPALIVE = 3;
@@ -69,7 +68,6 @@ public class SensorClient {
      * only to be called on a registered client, check with SensorClient.isRegistered()
      */
     public void sendEvent() {
-
         new UDPSendTask(TYPE_EVENT).execute(new MEvent());
     }
 
@@ -89,7 +87,6 @@ public class SensorClient {
      * Method send keep alive and tries to receive a Shake periodically
      */
     private void sendKeepAlivePeriodically() {
-
         //only once else there is a mess
         receiverWorker = new ReceiverWorker();
         periodic = new Thread(receiverWorker);
@@ -109,10 +106,7 @@ public class SensorClient {
             }
         };
         periodic.start();
-
-
     }
-
 
     /**
      * Sends unregister header to sensor server. Don't expect any result it is
@@ -141,7 +135,6 @@ public class SensorClient {
         this.onShakeListener = onShakeListener;
     }
 
-
     public void setSensorServerIp(String sensorServerIp) {
         this.sensorServerIp = sensorServerIp;
     }
@@ -153,9 +146,6 @@ public class SensorClient {
     public boolean isRegistered() {
         return isRegistered;
     }
-
-
-
 
     /**
      * Periodic worker running keep-alive request after each SO_TIMEOUT seconds.
@@ -174,7 +164,6 @@ public class SensorClient {
                 //send keep alive
                 try {
                     sendAsDatagram(new KeepAlive());
-
 
                     //try receive something for SO_TIMEOUT seconds
                     byte[] recBuf = new byte[RECEIVE_BUFFER_MAX];
@@ -202,17 +191,13 @@ public class SensorClient {
                 bundle.putSerializable(SHAKE_DATA, shake);
                 msg.setData(bundle);
                 uiCallback.sendMessage(msg);
-
             }
         }
 
         public void terminate() {
             running = false;
         }
-
-
     }
-
 
     /**
      * Simple task for sending, no response reading
@@ -224,13 +209,10 @@ public class SensorClient {
             this.type = type;
         }
 
-
         @Override
         protected Void doInBackground(Packet... packets) {
-
             try {
                 sendAsDatagram(packets[0]);
-
                 return null; //shake;
             } catch (UnknownHostException e) {
                 onShakeListener.onError(e.getMessage());
@@ -254,6 +236,7 @@ public class SensorClient {
 
     /**
      * Method sends udp packet assuming IP and port was provided.
+     *
      * @param packet1
      * @throws IOException
      */
@@ -261,7 +244,6 @@ public class SensorClient {
         InetAddress address;
         Packet packet = packet1;
         byte[] buffer = packet.getBytes();
-
 
         address = InetAddress.getByName(sensorServerIp);//localhost as to be accesssed from emulator
         DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length,
